@@ -29,7 +29,6 @@
     overflow:hidden;
     direction:rtl;
   }
-  /* زخرفة خلفية خفيفة تشبه الشعار */
   .fe-wrap::before{
     content:"";
     position:absolute;
@@ -147,7 +146,6 @@
     font-weight:600;
   }
 
-  /* بطاقة أفضل طالب */
   .fe-top-student{
     position:relative;
     z-index:2;
@@ -197,24 +195,10 @@
     color:var(--gray);
     font-size:13px;
   }
-  .fe-ts-badge{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:var(--teal-glow);
-    font-weight:800;
-    font-size:14px;
-    background:rgba(255,255,255,0.05);
-    padding:8px 16px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,0.1);
-  }
-  .fe-ts-badge svg{width:20px;height:20px;stroke:var(--teal-glow);fill:none;stroke-width:2;}
 
   @media (max-width:600px){
     .fe-top-student{flex-direction:column;align-items:stretch;text-align:center;}
     .fe-top-student .fe-ts-right{flex-direction:column;}
-    .fe-ts-badge{justify-content:center;}
   }
 </style>
 </head>
@@ -233,7 +217,7 @@
       <div class="fe-icon">
         <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-5.13a4 4 0 100-8 4 4 0 000 8zm6 3a4 4 0 10-3-6.87"/></svg>
       </div>
-      <div class="fe-number" data-target="1250"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
+      <div class="fe-number" id="card-students" data-target="0"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
       <div class="fe-label">طالب مستفيد</div>
     </div>
 
@@ -241,7 +225,7 @@
       <div class="fe-icon">
         <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
       </div>
-      <div class="fe-number" data-target="48"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
+      <div class="fe-number" id="card-lessons" data-target="0"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
       <div class="fe-label">درس تفاعلي</div>
     </div>
 
@@ -249,7 +233,7 @@
       <div class="fe-icon">
         <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
       </div>
-      <div class="fe-number" data-target="320"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
+      <div class="fe-number" id="card-certificates" data-target="0"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
       <div class="fe-label">شهادة إنجاز صادرة</div>
     </div>
 
@@ -257,7 +241,7 @@
       <div class="fe-icon">
         <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2.9 6.26L21 9.27l-4.5 4.39L17.8 21 12 17.77 6.2 21l1.3-7.34L3 9.27l6.1-1.01z"/></svg>
       </div>
-      <div class="fe-number" data-target="96"><span class="fe-count">0</span><span class="fe-plus">%</span></div>
+      <div class="fe-number" id="card-satisfaction" data-target="0"><span class="fe-count">0</span><span class="fe-plus">%</span></div>
       <div class="fe-label">نسبة رضا الطلاب</div>
     </div>
 
@@ -265,11 +249,11 @@
 
   <div class="fe-top-student">
     <div class="fe-ts-right">
-      <div class="fe-avatar">A</div>
+      <div class="fe-avatar" id="student-avatar">-</div>
       <div class="fe-ts-info">
         <span class="fe-ts-tag">⭐ طالب الشهر</span>
-        <h3>اسم الطالب المتميز</h3>
-        <p>تفوّق في وحدة الخواص الفيزيائية للمادة بأعلى نسبة إنجاز</p>
+        <h3 id="student-name">جاري التحميل...</h3>
+        <p id="student-desc">...</p>
       </div>
     </div>
   </div>
@@ -277,6 +261,9 @@
 </div>
 
 <script>
+  // الرابط الخاص بجوجل شيت تم إدراجه هنا تلقائياً ومباشرة
+  const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQKN1gyUkoaLaxze82yAVP3wsRvVgltcpnYd8tlFINPkjdy3YsYoa155G6JdTH2IMWJZyRSCvbmo3S/pub?output=csv";
+
   function animateCount(el){
     const target = +el.getAttribute('data-target');
     const countEl = el.querySelector('.fe-count');
@@ -292,18 +279,62 @@
     requestAnimationFrame(step);
   }
 
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        animateCount(entry.target);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold:0.4});
+  // دالة جلب البيانات من جوجل شيت وتحديث الصفحة
+  async function fetchSheetData() {
+    try {
+      const response = await fetch(googleSheetCsvUrl);
+      const data = await response.text();
+      
+      // تحليل الـ CSV إلى مصفوفة كائنية Key-Value
+      const rows = data.split("\n");
+      const sheetData = {};
+      
+      rows.forEach(row => {
+        const columns = row.split(",");
+        if(columns.length >= 2) {
+          const key = columns[0].trim().replace(/^"|"$/g, '');
+          const value = columns[1].trim().replace(/^"|"$/g, '');
+          sheetData[key] = value;
+        }
+      });
 
-  document.querySelectorAll('.fe-number[data-target]').forEach(el=>{
-    observer.observe(el);
-  });
+      // تحديث قيم الـ data-target في كروت الإحصائيات
+      if(sheetData['students']) document.getElementById('card-students').setAttribute('data-target', sheetData['students']);
+      if(sheetData['lessons']) document.getElementById('card-lessons').setAttribute('data-target', sheetData['lessons']);
+      if(sheetData['certificates']) document.getElementById('card-certificates').setAttribute('data-target', sheetData['certificates']);
+      if(sheetData['satisfaction']) document.getElementById('card-satisfaction').setAttribute('data-target', sheetData['satisfaction']);
+
+      // تحديث بيانات أفضل طالب مباشرة
+      if(sheetData['student_name']) document.getElementById('student-name').textContent = sheetData['student_name'];
+      if(sheetData['student_avatar']) document.getElementById('student-avatar').textContent = sheetData['student_avatar'];
+      if(sheetData['student_desc']) document.getElementById('student-desc').textContent = sheetData['student_desc'];
+
+      // تفعيل العداد والـ IntersectionObserver بعد تحميل البيانات بنجاح
+      initObserver();
+
+    } catch (error) {
+      console.error("خطأ في جلب البيانات من جوجل شيت:", error);
+      document.getElementById('student-name').textContent = "اسم الطالب المتميز";
+    }
+  }
+
+  function initObserver() {
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.4});
+
+    document.querySelectorAll('.fe-number[data-target]').forEach(el=>{
+      observer.observe(el);
+    });
+  }
+
+  // بدء الجلب عند تحميل الصفحة
+  window.addEventListener('DOMContentLoaded', fetchSheetData);
 </script>
 
 </body>
