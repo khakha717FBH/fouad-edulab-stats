@@ -6,7 +6,7 @@
     <title>Fouad EduLab - إنجازاتنا بالأرقام</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="family">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -22,31 +22,24 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header badge {
-            background-color: rgba(0, 245, 212, 0.1);
-            color: var(--accent-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid var(--accent-color);
+            margin-bottom: 25px;
+            padding: 0 10px;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin: 15px 0;
+            font-size: 2rem;
+            margin: 10px 0;
             color: #fff;
         }
 
@@ -55,115 +48,138 @@
         }
 
         .header p {
-            color: #a984aa;
-            font-size: 1.1rem;
+            color: #a0aec0;
+            font-size: 0.95rem;
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.5;
         }
 
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr); /* جعلها شبكة 2x2 بشكل افتراضي شاشات المحمول */
+            gap: 15px;
             width: 100%;
             max-width: 1100px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr); /* العودة لأربعة بجانب بعضها على الكمبيوتر */
+                gap: 25px;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .header p {
+                font-size: 1.1rem;
+            }
         }
 
         .stat-card {
             background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px 20px;
+            border-radius: 12px;
+            padding: 20px 10px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: rgba(0, 245, 212, 0.2);
         }
 
         .icon-wrapper {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background-color: rgba(0, 180, 216, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 10px;
             color: var(--accent-color);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-number {
+                font-size: 3rem;
+            }
+            .icon-wrapper {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            .stat-card {
+                padding: 30px 20px;
+            }
         }
 
         .stat-label {
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #a0aec0;
             font-weight: 600;
         }
 
-        /* قسم طالب الشهر */
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 1rem;
+            }
+        }
+
         .featured-student {
-            margin-top: 50px;
+            margin-top: 30px;
             background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            width: 100%;
+            border-radius: 12px;
+            padding: 20px;
+            width: calc(100% - 20px);
             max-width: 600px;
             text-align: center;
-            border: 1px solid rgba(0, 245, 212, 0.3);
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            box-sizing: border-box;
         }
 
         .student-badge {
             background-color: #00f5d4;
             color: #0d1b2a;
-            padding: 5px 15px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
         }
 
         .student-name {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #fff;
-            margin: 10px 0;
+            margin: 5px 0;
         }
 
         .student-desc {
             color: #a0aec0;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 5px 0 0 0;
         }
 
         .loading {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--accent-color);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <span class="student-badge" style="background: rgba(0,180,216,0.2); color: var(--primary-color); border: 1px solid var(--primary-color);">Fouad EduLab — Learn • Explore • Innovate 🚀</span>
         <h1>إنجازاتنا معًا <span>بالأرقام</span></h1>
-        <p>كل رقم هنا يمثل طالبًا اكتشف شغفه بالعلوم... انضم إلى رحلة التعلم والاستكشاف والإبداع!</p>
+        <p>كل رقم هنا يمثل طالبًا اكتشف شغفه بالعلوم في منصة Fouad EduLab.</p>
     </div>
 
     <div class="stats-container">
@@ -182,7 +198,7 @@
         <div class="stat-card">
             <div class="icon-wrapper">🛡️</div>
             <div class="stat-number" id="certificatesCount">...</div>
-            <div class="stat-label">شهادة إنجاز صادرة</div>
+            <div class="stat-label">شهادة صادرة</div>
         </div>
 
         <div class="stat-card">
@@ -200,7 +216,6 @@
     </div>
 
     <script>
-        // رابط جلب البيانات بصيغة CSV الخاص بجدولك المحدث
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQKN1gyUkoaLaxze82yAVP3wsRvVgItcpnYd8tlFINPkjdy3YsYoa155G6JdTH2IMWJZyRSCvbmo3S/pub?output=csv';
 
         async function fetchStats() {
@@ -208,26 +223,23 @@
                 const response = await fetch(sheetUrl);
                 const data = await response.text();
                 
-                // تحويل بيانات CSV إلى مصفوفة أسطر
-                const rows = data.split('\n').map(row => row.split(','));
-                
-                // تحويل البيانات إلى كائن مفتاح وقيمة (Key-Value)
+                const lines = data.split('\n');
                 const stats = {};
-                rows.forEach(row => {
+
+                lines.forEach(line => {
+                    let row = line.includes(';') ? line.split(';') : line.split(',');
                     if (row[0] && row[1]) {
-                        const key = row[0].trim();
-                        const value = row[1].trim().replace(/\r/g, ''); // إزالة أي مسافات مخفية
+                        const key = row[0].trim().replace(/["']/g, '');
+                        const value = row[1].trim().replace(/["']/g, '').replace(/\r/g, '');
                         stats[key] = value;
                     }
                 });
 
-                // 1. تحديث العدادات الرقمية مع الأنيميشن السلس
                 animateNumber('studentsCount', parseInt(stats['students']) || 0, '');
                 animateNumber('lessonsCount', parseInt(stats['lessons']) || 0, '+');
                 animateNumber('certificatesCount', parseInt(stats['certificates']) || 0, '+');
                 animateNumber('satisfactionCount', parseInt(stats['satisfaction']) || 0, '%');
 
-                // 2. تحديث بيانات طالب الشهر المتميز
                 const studentName = stats['student_name'] || 'طالب متميز';
                 const studentDesc = stats['student_desc'] || 'تفوق واجتهاد مستمر في المختبر العلمي.';
                 
@@ -238,15 +250,14 @@
 
             } catch (error) {
                 console.error('Error fetching data:', error);
-                document.getElementById('studentContainer').innerHTML = `<p style="color: red;">عذرًا، تعذر تحميل بيانات طالب الشهر حاليًا.</p>`;
+                document.getElementById('studentContainer').innerHTML = `<p style="color: red; font-size:0.9rem;">تعذر تحميل بيانات طالب الشهر حاليًا.</p>`;
             }
         }
 
-        // دالة الأنيميشن لزيادة الأرقام تدريجيًا من الصفر
         function animateNumber(elementId, targetValue, suffix) {
             const element = document.getElementById(elementId);
             let startValue = 0;
-            const duration = 1500; // مدة الحركة بالملي ثانية (1.5 ثانية)
+            const duration = 1200;
             const startTime = performance.now();
 
             function update(currentTime) {
@@ -255,7 +266,6 @@
                     element.textContent = targetValue + suffix;
                 } else {
                     const progress = elapsedTime / duration;
-                    // تأثير زيادة تسارعية خفيفة
                     const currentValue = Math.floor(progress * targetValue);
                     element.textContent = currentValue + suffix;
                     requestAnimationFrame(update);
@@ -264,7 +274,6 @@
             requestAnimationFrame(update);
         }
 
-        // تشغيل الدالة فور تحميل الصفحة
         window.addEventListener('DOMContentLoaded', fetchStats);
     </script>
 </body>
