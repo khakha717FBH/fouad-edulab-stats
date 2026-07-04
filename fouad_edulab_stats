@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fouad EduLab - إنجازاتنا بالأرقام</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-dark:#0d1524;
+    --navy:#1B2640;
+    --navy-light:#243252;
+    --teal:#14c8a8;
+    --teal-glow:#4fe8cf;
+    --white:#ffffff;
+    --gray:#a9b4cc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Cairo', sans-serif;
+    background:transparent;
+  }
+  .fe-wrap{
+    width:100%;
+    background:linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-light) 100%);
+    padding:38px 20px 42px;
+    position:relative;
+    overflow:hidden;
+    direction:rtl;
+  }
+  /* زخرفة خلفية خفيفة تشبه الشعار */
+  .fe-wrap::before{
+    content:"";
+    position:absolute;
+    top:-80px; right:-80px;
+    width:260px; height:260px;
+    border-radius:50%;
+    border:2px solid rgba(20,200,168,0.15);
+  }
+  .fe-wrap::after{
+    content:"";
+    position:absolute;
+    bottom:-100px; left:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    border:2px solid rgba(20,200,168,0.1);
+  }
+  .fe-header{
+    text-align:center;
+    position:relative;
+    z-index:2;
+    margin-bottom:30px;
+  }
+  .fe-header .fe-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(20,200,168,0.12);
+    border:1px solid rgba(20,200,168,0.35);
+    color:var(--teal-glow);
+    font-weight:700;
+    font-size:13px;
+    padding:6px 16px;
+    border-radius:30px;
+    margin-bottom:14px;
+  }
+  .fe-header h2{
+    color:var(--white);
+    font-size:clamp(22px, 3.2vw, 30px);
+    font-weight:900;
+    margin-bottom:8px;
+  }
+  .fe-header h2 span{
+    color:var(--teal);
+  }
+  .fe-header p{
+    color:var(--gray);
+    font-size:15px;
+    max-width:560px;
+    margin:0 auto;
+    line-height:1.8;
+  }
+
+  .fe-stats-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  @media (max-width:900px){
+    .fe-stats-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  @media (max-width:480px){
+    .fe-stats-grid{grid-template-columns:1fr;}
+  }
+
+  .fe-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:26px 18px;
+    text-align:center;
+    backdrop-filter:blur(6px);
+    transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .fe-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(20,200,168,0.5);
+    box-shadow:0 12px 30px rgba(20,200,168,0.15);
+  }
+  .fe-card .fe-icon{
+    width:56px;height:56px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--teal), #0a8f7a);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(20,200,168,0.35);
+  }
+  .fe-card .fe-icon svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:2;}
+
+  .fe-number{
+    font-size:clamp(28px, 4vw, 38px);
+    font-weight:900;
+    color:var(--white);
+    line-height:1.1;
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:3px;
+    direction:ltr;
+  }
+  .fe-number .fe-plus{
+    color:var(--teal);
+    font-size:0.6em;
+    font-weight:800;
+  }
+  .fe-label{
+    margin-top:8px;
+    color:var(--gray);
+    font-size:14px;
+    font-weight:600;
+  }
+
+  /* بطاقة أفضل طالب */
+  .fe-top-student{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+    margin:26px auto 0;
+    background:linear-gradient(120deg, rgba(20,200,168,0.12), rgba(255,255,255,0.03));
+    border:1px solid rgba(20,200,168,0.35);
+    border-radius:20px;
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .fe-top-student .fe-ts-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .fe-avatar{
+    width:64px;height:64px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--teal), #1B2640);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:900;font-size:22px;
+    border:3px solid rgba(255,255,255,0.15);
+    flex-shrink:0;
+  }
+  .fe-ts-info .fe-ts-tag{
+    display:inline-block;
+    background:var(--teal);
+    color:var(--navy-dark);
+    font-size:11px;
+    font-weight:800;
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:6px;
+  }
+  .fe-ts-info h3{
+    color:#fff;
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:3px;
+  }
+  .fe-ts-info p{
+    color:var(--gray);
+    font-size:13px;
+  }
+  .fe-ts-badge{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--teal-glow);
+    font-weight:800;
+    font-size:14px;
+    background:rgba(255,255,255,0.05);
+    padding:8px 16px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .fe-ts-badge svg{width:20px;height:20px;stroke:var(--teal-glow);fill:none;stroke-width:2;}
+
+  @media (max-width:600px){
+    .fe-top-student{flex-direction:column;align-items:stretch;text-align:center;}
+    .fe-top-student .fe-ts-right{flex-direction:column;}
+    .fe-ts-badge{justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="fe-wrap">
+  <div class="fe-header">
+    <span class="fe-eyebrow">🚀 Fouad EduLab — Learn · Explore · Innovate</span>
+    <h2>إنجازاتنا معًا <span>بالأرقام</span></h2>
+    <p>كل رقم هنا يمثل طالبًا اكتشف شغفه بالعلوم... انضم إلى رحلة التعلم والاستكشاف والإبداع!</p>
+  </div>
+
+  <div class="fe-stats-grid">
+
+    <div class="fe-card">
+      <div class="fe-icon">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-5.13a4 4 0 100-8 4 4 0 000 8zm6 3a4 4 0 10-3-6.87"/></svg>
+      </div>
+      <div class="fe-number" data-target="1250"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
+      <div class="fe-label">طالب مستفيد</div>
+    </div>
+
+    <div class="fe-card">
+      <div class="fe-icon">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      </div>
+      <div class="fe-number" data-target="48"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
+      <div class="fe-label">درس تفاعلي</div>
+    </div>
+
+    <div class="fe-card">
+      <div class="fe-icon">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+      </div>
+      <div class="fe-number" data-target="320"><span class="fe-count">0</span><span class="fe-plus">+</span></div>
+      <div class="fe-label">شهادة إنجاز صادرة</div>
+    </div>
+
+    <div class="fe-card">
+      <div class="fe-icon">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2.9 6.26L21 9.27l-4.5 4.39L17.8 21 12 17.77 6.2 21l1.3-7.34L3 9.27l6.1-1.01z"/></svg>
+      </div>
+      <div class="fe-number" data-target="96"><span class="fe-count">0</span><span class="fe-plus">%</span></div>
+      <div class="fe-label">نسبة رضا الطلاب</div>
+    </div>
+
+  </div>
+
+  <div class="fe-top-student">
+    <div class="fe-ts-right">
+      <div class="fe-avatar">A</div>
+      <div class="fe-ts-info">
+        <span class="fe-ts-tag">⭐ طالب الشهر</span>
+        <h3>اسم الطالب المتميز</h3>
+        <p>تفوّق في وحدة الخواص الفيزيائية للمادة بأعلى نسبة إنجاز</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function animateCount(el){
+    const target = +el.getAttribute('data-target');
+    const countEl = el.querySelector('.fe-count');
+    const duration = 1800;
+    const start = performance.now();
+    function step(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      countEl.textContent = Math.floor(eased * target).toLocaleString('en-US');
+      if(progress < 1){ requestAnimationFrame(step); }
+      else{ countEl.textContent = target.toLocaleString('en-US'); }
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        animateCount(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+
+  document.querySelectorAll('.fe-number[data-target]').forEach(el=>{
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
